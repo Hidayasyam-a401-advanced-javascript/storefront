@@ -1,31 +1,30 @@
-let initalState = {
+// State should be a list of all products
+// Each product should have a category association, name, description, price, inventory count
+// Create an action that will trigger when the active category is changed
+// HINT: Multiple reducers can respond to the same actions
+// Create a reducer that will filter the products list based on the active category
+// Define initial state
+const initialState = {
   products: [
-    { name: 'TV', category: 'electronics', price: 699.00, inventory : 5 },
-    { name: 'Radio', category: 'electronics', price: 99.00, inventory : 15 },
-    { name: 'Shirt', category: 'clothing', price: 9.00, inventory : 25 },
-    { name: 'Socks', category: 'clothing', price: 12.00, inventory : 10 },
-    { name: 'Apples', category: 'food', price: .99, inventory : 500 },
-    { name: 'Eggs', category: 'food', price: 1.99, inventory : 12 },
-    { name: 'Bread', category: 'food', price: 2.39, inventory : 90 },
+    {category: 'electronics', name: 'Laptop', description: 'For surfing the web on the go', price: '$2999', inventory: 20},
+    {category: 'electronics', name: 'Phone', description: 'To keep you connected', price: '$999', inventory: 30},
+    {category: 'food', name: 'Carrots', description: 'Improve your night vision', price: '$2.99', inventory: 50},
+    {category: 'food', name: 'Apples', description: 'One a day keeps the doctor away', price: '$0.99', inventory: 80},
+    {category: 'food', name: 'Beets', description: 'Caution: Will stain everything', price: '$3.99', inventory: 15},
   ],
-  display:[],
-};
-// reducer
+  displayedProducts: []
+}
+// Define reducer
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initalState, action) => {
-  let  {type,payload } = action;
-  console.log('action',action);
-  switch (type) {
-  case 'ACTIVATE':
-    let targetCategory = payload;
-    console.log('targetCategory',targetCategory);
-    let  display = state.products.filter(product => {
-      // console.log('product.category',product.category)
-      return product.category === targetCategory;
-    });
-    console.log('DISPLAY PRODS', display);
-    return  { ...state, display } ;
-  default:
-    return state;
+export default (state = initialState, action) => {
+  const {type, payload} = action;
+  switch(type) {
+    case 'Change':
+      let displayedProducts = state.products.filter(product => {
+        return product.category === payload;
+      })
+      return {...state, displayedProducts};
+    default:
+      return state;
   }
-};
+}

@@ -1,9 +1,10 @@
 import {createStore, combineReducers} from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import categories from './categories';
+import {composeWithDevTools} from 'redux-devtools-extension'
+// import reducers
 import products from './products';
-// when you have more than one reducer combine here everything
-let reducers = combineReducers({categories,products});
+import categories from './categories';
+import cart from './cart'
+let reducers = combineReducers({ products, categories,cart });
 const store = () => {
   return createStore(reducers, composeWithDevTools());
 };

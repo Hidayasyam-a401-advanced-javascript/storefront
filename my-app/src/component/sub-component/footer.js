@@ -4,9 +4,9 @@ import React from 'react'
 export default function Header() {
 
     return (
-        <div>
+        <div style={{background:'#212529'}}>
 
-            <h3>@ Code Fellows</h3>
+            <h5 style={{color:'white'}}>@ Code Fellows</h5>
 
         </div>
     )
