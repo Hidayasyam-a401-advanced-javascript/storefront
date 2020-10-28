@@ -4,9 +4,9 @@ import {Active} from '../store/categories.js'
 const Categories = props => {
   return (
       <section className="category">
-        {console.log('Props:', props)}
+        {/* {console.log('Props category   :', props.category.activeCategory.name)} */}
         <h3>Browse our Categories </h3><br/>
-          <p>{props.category.activeCategory.displayName}</p>
+          {/* <p>{props.category.activeCategory}</p> */}
       </section>
     )
 }
