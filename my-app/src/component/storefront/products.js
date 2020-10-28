@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {AddCart} from '../store/cart'
 import {getProducts}from '../store/products'
+import {ViewAction} from '../store/detalis'
+import { Link, NavLink } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
     maxWidth: 140,
@@ -40,6 +42,7 @@ const Products = props => {
           title="none"
         />
          <Button style={{backgroundColor:"green"}} onClick={()=>props.AddCart(product.name)}>Add to Cart</Button>
+         <Button onClick={()=>props.ViewAction(product)} ><Link  style={{textDecoration:"none",color:'black'}} to={`/product`} activeClassName="list-class">Product Details</Link></Button>
         </Card>
 
        
@@ -51,7 +54,7 @@ const mapStateToProps = state => ({
   products: state.products
 })
 
-const mapDispatchToProps = {AddCart,getProducts}
+const mapDispatchToProps = {AddCart,getProducts,ViewAction}
 export default connect(mapStateToProps,mapDispatchToProps)(Products);
 
 //   {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
