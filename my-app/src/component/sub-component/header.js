@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react'
+import {useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { connect } from 'react-redux';
-import { Active } from "../store/categories";
+import { getCategories } from "../store/categories";
+import { Active } from '../store/categories'
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
@@ -17,8 +19,14 @@ function CenteredTabs(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        props.getCategories();
+      },[])
     return (
+        
         <header>
+              {console.log('category ------> ', props.category.categories)}
             <Paper className={classes.root}>
                 <Tabs
                     value={value}
@@ -27,9 +35,10 @@ function CenteredTabs(props) {
                     textColor="primary"
                     centered
                 >
-                    {Object.keys(props.category.categories).map(category => {
-                        return <Tab label={`${category}`}
-                            onClick={() => props.Active(category)} ></Tab>
+                    {Object.values(props.category.categories).map(category => {
+                        console.log('category : ', category)
+                        return <Tab label={`${category.name}`}
+                            onClick={() => props.Active(category.name)} ></Tab>
                     })}
                 </Tabs>
             </Paper>
@@ -39,5 +48,5 @@ function CenteredTabs(props) {
 const mapStateToProps = state => ({
     category: state.categories,
 })
-const mapDispatchToProps = { Active }
+const mapDispatchToProps = {Active,getCategories }
 export default connect(mapStateToProps, mapDispatchToProps)(CenteredTabs);
