@@ -8,8 +8,25 @@ export default (state = initalState, action) => {
   let basket = state.basket;
   switch (type) {
     case "Add":
-      if (basket.indexOf(payload) <= -1) {
+      // let product =payload;
+       
+      //   let list = []
+      //   product.forEach(element => {
+      //      list.push(Object.values(element))
+      //   });
+      //    console.log('list',list)
+      //    for(let i = 0; i < list.length;i++ ){
+      //   if (payload===list[i][1]){
+
+      //   let activeCategory = list[i][1]
+      //   return {activeCategory, categories};
+      // }}
+      // break
+      console.log('AddCart ' ,Object.values(payload))
+
+      if (basket.indexOf(payload.name) <= -1) {
         basket = [...basket, payload];
+        console.log('basket ---> : ',basket)
       }
       return { basket };
       case "Delete":

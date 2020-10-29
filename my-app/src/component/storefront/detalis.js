@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { AddCart } from '../store/cart'
 import { ViewAction } from '../store/detalis'
@@ -7,10 +7,28 @@ function Details(props) {
     console.log('detalis : ', props.detalis.payload)
     return (
         <>
-            <Card>
+            <Card style={{ width: '500px', height: '350px', margin: '20px' }}>
+                <Card.Img variant="top" style={{ width: '300px', height: '200px', marginLeft: '100px' }} src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" />
                 <Card.Header>{props.detalis.payload.name}</Card.Header>
-                <Card.Img></Card.Img>
-                <Card.Body></Card.Body>
+                <Card.Body>
+                    <small>Price : {props.detalis.payload.price}$</small>
+                    <small style={{ float: 'right' }}>inStock : {props.detalis.payload.inStock}</small>
+
+
+
+                </Card.Body>
+                <Button onClick={() => props.AddCart(props.detalis.payload)} variant="primary">Buy</Button>
+            </Card>
+            <h3>Related Item</h3>
+            <Card style={{ display: 'flex', flexDirection: 'row' }}>
+
+                <br />
+                {props.products.displayedProducts.map(product => {
+
+                    return <Button style={{ margin: '5px' }} onClick={() => props.ViewAction(product)} >{product.name}</Button>
+                })
+
+                }
             </Card>
         </>
     )
@@ -18,7 +36,9 @@ function Details(props) {
 }
 
 const mapStateToProps = state => ({
-    detalis: state.detalis
+    detalis: state.detalis,
+    products: state.products
+
 })
 
 const mapDispatchToProps = { AddCart, ViewAction }

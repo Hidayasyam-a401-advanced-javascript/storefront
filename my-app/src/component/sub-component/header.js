@@ -1,5 +1,5 @@
 import React from 'react'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import { connect } from 'react-redux';
 import { getCategories } from "../store/categories";
 import { Active } from '../store/categories'
+import { AddCart } from '../store/cart'
+import { Link } from 'react-router-dom'
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
@@ -22,12 +24,14 @@ function CenteredTabs(props) {
 
     useEffect(() => {
         props.getCategories();
-      },[])
+    }, [])
     return (
-        
+
         <header>
-              {console.log('category ------> ', props.category.categories)}
+            {console.log('category ------> ', props.category.categories)}
+
             <Paper className={classes.root}>
+
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -37,16 +41,25 @@ function CenteredTabs(props) {
                 >
                     {Object.values(props.category.categories).map(category => {
                         console.log('category : ', category)
-                        return <Tab label={`${category.name}`}
+                        return <Tab  component={Link} 
+                        to={'./'} label={`${category.name}`}
                             onClick={() => props.Active(category.name)} ></Tab>
                     })}
+                    <Tab component={Link} 
+                            to={'./cart'} label={`Cart (${ 0 || props.basket.length})`}  ></Tab>
                 </Tabs>
+                {/* <Button  style={{marginTop:'-45px', float:'right'}}></Button> */}
+
             </Paper>
+
         </header>
     )
 }
 const mapStateToProps = state => ({
     category: state.categories,
+    basket: state.cart.basket,
+
+
 })
-const mapDispatchToProps = {Active,getCategories }
+const mapDispatchToProps = { AddCart, Active, getCategories }
 export default connect(mapStateToProps, mapDispatchToProps)(CenteredTabs);

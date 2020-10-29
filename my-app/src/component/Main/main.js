@@ -4,6 +4,8 @@ import Product from '../storefront/products';
 import Categories from '../storefront/categories';
 import { Route, Switch } from 'react-router-dom';
 import Detalis from '../storefront/detalis'
+import Cart from '../storefront/cart'
+
 //import List from './list';
 //import HomePage from './home-page.js'
 
@@ -20,6 +22,9 @@ function Main(props) {
                 </Route>
                 <Route exact path="/product">
                     <Detalis />
+                </Route>
+                <Route exact path="/cart">
+                    <Cart />
                 </Route>
                 {/* <Route exact path="/list">
                         <List check="hi">
