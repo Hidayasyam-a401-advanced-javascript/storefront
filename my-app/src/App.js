@@ -2,19 +2,18 @@ import React from 'react';
 import './App.css';
 import Header from './component/sub-component/header';
 import Footer from './component/sub-component/footer';
-import Product from './component/storefront/products';
-import Categories from './component/storefront/categories';
 import Cart from './component/storefront/cart'
+import Main from './component/Main/main'
+import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
-  <>
-  <Header/>
-  <Cart/>
-  <Categories/>
-  <Product/>
-  <Footer/>
- 
-  </>
+    <>
+      <BrowserRouter>
+      <Header/>
+        <Main />
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
 export default App;

@@ -5,8 +5,8 @@ import thunk from 'redux-thunk';
 import products from './products';
 import categories from './categories';
 import cart from './cart';
-
-let reducers = combineReducers({ products, categories ,cart});
+import detalis from './detalis';
+let reducers = combineReducers({ products, categories ,cart,detalis});
 
 const store = () => {
   return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
